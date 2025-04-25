@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Sharing - Inter-departmental Cooperation Platform</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.svg" alt="Platform Logo">
+            <h1>Inter-departmental Cooperation Platform</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="data-sharing.html" class="active"><i class="fas fa-database"></i> Data Sharing</a></li>
+                <li><a href="resource-allocation.html"><i class="fas fa-share-alt"></i> Resource Allocation</a></li>
+                <li><a href="project-planning.html"><i class="fas fa-project-diagram"></i> Project Planning</a></li>
+                <li><a href="implementation-tracking.html"><i class="fas fa-chart-line"></i> Implementation Tracking</a></li>
+            </ul>
+        </nav>
+        <div class="user-info">
+            <span class="user-name">Welcome, Admin</span>
+            <div class="user-avatar">
+                <img src="images/avatar.svg" alt="User Avatar">
+            </div>
+            <div class="dropdown">
+                <i class="fas fa-caret-down"></i>
+                <div class="dropdown-content">
+                    <a href="profile.html"><i class="fas fa-user-cog"></i> Profile</a>
+                    <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="department-selector">
+                <h3>Select Department</h3>
+                <select id="department-select" aria-label="Select Department">
+                    <option value="all">All Departments</option>
+                    <option value="water">Water Supply</option>
+                    <option value="transport">Transportation</option>
+                    <option value="electricity">Electricity</option>
+                    <option value="waste">Waste Management</option>
+                    <option value="urban">Urban Planning</option>
+                </select>
+            </div>
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="data-sharing.html#upload"><i class="fas fa-upload"></i> Upload New Dataset</a></li>
+                    <li><a href="data-sharing.html#downloads"><i class="fas fa-download"></i> My Downloads</a></li>
+                    <li><a href="data-sharing.html#activity"><i class="fas fa-history"></i> Recent Activity</a></li>
+                    <li><a href="data-sharing.html#favorites"><i class="fas fa-star"></i> Favorites</a></li>
+                </ul>
+            </div>
+            <div class="city-selector">
+                <h3>Select City</h3>
+                <select id="city-select" aria-label="Select City">
+                    <option value="delhi">New Delhi</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="bangalore">Bangalore</option>
+                    <option value="chennai">Chennai</option>
+                    <option value="kolkata">Kolkata</option>
+                    <option value="hyderabad">Hyderabad</option>
+                    <option value="pune">Pune</option>
+                </select>
+            </div>
+        </aside>
+
+        <main class="content">
+            <div class="dashboard-header">
+                <h2>Data Sharing</h2>
+                <div class="search-container">
+                    <input type="text" id="search-datasets" placeholder="Search datasets..." aria-label="Search datasets">
+                    <button type="button" class="search-btn" aria-label="Search Datasets"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="primary-btn"><i class="fas fa-upload"></i> Upload New Dataset</button>
+                <button class="secondary-btn"><i class="fas fa-filter"></i> Filter</button>
+                <button class="secondary-btn"><i class="fas fa-sort"></i> Sort</button>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="all">All Datasets</button>
+                <button class="tab-btn" data-tab="shared">Shared by Me</button>
+                <button class="tab-btn" data-tab="received">Shared with Me</button>
+                <button class="tab-btn" data-tab="favorites">Favorites</button>
+            </div>
+
+            <div class="datasets-container">
+                <div class="dataset-card">
+                    <div class="dataset-header">
+                        <div class="dataset-title">
+                            <h3>Water Supply Network Data</h3>
+                            <span class="department-tag">Water</span>
+                        </div>
+                        <div class="dataset-actions">
+                            <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                            <button class="icon-btn" title="Add to favorites"><i class="far fa-star"></i></button>
+                            <button class="icon-btn" title="Share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="dataset-info">
+                        <p><i class="fas fa-info-circle"></i> Contains water pipeline network data for the entire city</p>
+                        <p><i class="fas fa-calendar-alt"></i> Last updated: 15 Jun 2023</p>
+                        <p><i class="fas fa-file"></i> Format: GIS Shapefile, CSV</p>
+                    </div>
+                    <div class="dataset-footer">
+                        <span class="dataset-size">245 MB</span>
+                        <span class="dataset-downloads"><i class="fas fa-download"></i> 37 downloads</span>
+                    </div>
+                </div>
+
+                <div class="dataset-card">
+                    <div class="dataset-header">
+                        <div class="dataset-title">
+                            <h3>Traffic Density Analysis</h3>
+                            <span class="department-tag">Transport</span>
+                        </div>
+                        <div class="dataset-actions">
+                            <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                            <button class="icon-btn" title="Add to favorites"><i class="far fa-star"></i></button>
+                            <button class="icon-btn" title="Share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="dataset-info">
+                        <p><i class="fas fa-info-circle"></i> Traffic density data collected from major intersections</p>
+                        <p><i class="fas fa-calendar-alt"></i> Last updated: 10 Jun 2023</p>
+                        <p><i class="fas fa-file"></i> Format: CSV, Excel</p>
+                    </div>
+                    <div class="dataset-footer">
+                        <span class="dataset-size">78 MB</span>
+                        <span class="dataset-downloads"><i class="fas fa-download"></i> 52 downloads</span>
+                    </div>
+                </div>
+
+                <div class="dataset-card">
+                    <div class="dataset-header">
+                        <div class="dataset-title">
+                            <h3>Power Consumption Patterns</h3>
+                            <span class="department-tag">Electricity</span>
+                        </div>
+                        <div class="dataset-actions">
+                            <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                            <button class="icon-btn" title="Add to favorites"><i class="far fa-star"></i></button>
+                            <button class="icon-btn" title="Share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="dataset-info">
+                        <p><i class="fas fa-info-circle"></i> Monthly power consumption data by district</p>
+                        <p><i class="fas fa-calendar-alt"></i> Last updated: 5 Jun 2023</p>
+                        <p><i class="fas fa-file"></i> Format: CSV, JSON</p>
+                    </div>
+                    <div class="dataset-footer">
+                        <span class="dataset-size">42 MB</span>
+                        <span class="dataset-downloads"><i class="fas fa-download"></i> 29 downloads</span>
+                    </div>
+                </div>
+
+                <div class="dataset-card">
+                    <div class="dataset-header">
+                        <div class="dataset-title">
+                            <h3>Waste Collection Routes</h3>
+                            <span class="department-tag">Waste</span>
+                        </div>
+                        <div class="dataset-actions">
+                            <button class="icon-btn" title="Download"><i class="fas fa-download"></i></button>
+                            <button class="icon-btn" title="Add to favorites"><i class="far fa-star"></i></button>
+                            <button class="icon-btn" title="Share"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="dataset-info">
+                        <p><i class="fas fa-info-circle"></i> Daily waste collection routes and schedules</p>
+                        <p><i class="fas fa-calendar-alt"></i> Last updated: 12 Jun 2023</p>
+                        <p><i class="fas fa-file"></i> Format: GIS Shapefile, KML</p>
+                    </div>
+                    <div class="dataset-footer">
+                        <span class="dataset-size">118 MB</span>
+                        <span class="dataset-downloads"><i class="fas fa-download"></i> 18 downloads</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <button class="pagination-btn" aria-label="Previous Page"><i class="fas fa-chevron-left"></i></button>
+                <button class="pagination-btn active" aria-label="Page 1">1</button>
+                <button class="pagination-btn" aria-label="Page 2">2</button>
+                <button class="pagination-btn" aria-label="Page 3">3</button>
+                <span class="pagination-ellipsis">...</span>
+                <button class="pagination-btn" aria-label="Page 10">10</button>
+                <button class="pagination-btn" aria-label="Next Page"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="share-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Share Dataset</h3>
+                <button class="close-btn" aria-label="Close Modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="share-departments">Select Departments</label>
+                    <select id="share-departments" multiple aria-label="Select departments to share with">
+                        <option value="water">Water Supply</option>
+                        <option value="transport">Transportation</option>
+                        <option value="electricity">Electricity</option>
+                        <option value="waste">Waste Management</option>
+                        <option value="urban">Urban Planning</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="share-message">Message (Optional)</label>
+                    <textarea id="share-message" rows="3" placeholder="Add a message..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Permission Level</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="permission" value="view" checked> View Only
+                        </label>
+                        <label>
+                            <input type="radio" name="permission" value="download"> Download
+                        </label>
+                        <label>
+                            <input type="radio" name="permission" value="edit"> Edit
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn">Cancel</button>
+                <button class="primary-btn">Share</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About the Platform</h4>
+                <p>A unified platform for inter-departmental cooperation in Indian cities, facilitating data sharing, resource allocation, and project implementation.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="settings.html#advanced">API Access</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><i class="fas fa-envelope"></i> support@idcp.gov.in</p>
+                <p><i class="fas fa-phone"></i> +91 11 2345 6789</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Inter-departmental Cooperation Platform | Ministry of Urban Development, Government of India</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Data Sharing specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // In a real application, this would filter the datasets based on the selected tab
+                    const tabType = this.getAttribute('data-tab');
+                    console.log(`Switching to ${tabType} tab`);
+                    
+                    // Show notification
+                    showNotification(`Showing ${tabType} datasets`);
+                    
+                    // Simulate loading
+                    simulateLoading();
+                });
+            });
+            
+            // Share button functionality
+            const shareButtons = document.querySelectorAll('.dataset-actions .icon-btn:nth-child(3)');
+            const shareModal = document.getElementById('share-modal');
+            const closeModalBtn = shareModal.querySelector('.close-btn');
+            const cancelBtn = shareModal.querySelector('.secondary-btn');
+            const shareBtn = shareModal.querySelector('.primary-btn');
+            
+            shareButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Get dataset name from parent card
+                    const datasetCard = this.closest('.dataset-card');
+                    const datasetName = datasetCard.querySelector('h3').textContent;
+                    
+                    // Update modal title
+                    shareModal.querySelector('.modal-header h3').textContent = `Share Dataset: ${datasetName}`;
+                    
+                    // Show modal
+                    shareModal.style.display = 'flex';
+                });
+            });
+            
+            // Close modal functionality
+            function closeModal() {
+                shareModal.style.display = 'none';
+            }
+            
+            closeModalBtn.addEventListener('click', closeModal);
+            cancelBtn.addEventListener('click', closeModal);
+            
+            // Share functionality
+            shareBtn.addEventListener('click', function() {
+                // In a real application, this would make an API call to share the dataset
+                
+                // Close modal
+                closeModal();
+                
+                // Show notification
+                showNotification('Dataset shared successfully');
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === shareModal) {
+                    closeModal();
+                }
+            });
+            
+            // Favorite button functionality
+            const favoriteButtons = document.querySelectorAll('.dataset-actions .icon-btn:nth-child(2)');
+            
+            favoriteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    
+                    if (icon.classList.contains('far')) {
+                        // Add to favorites
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        showNotification('Added to favorites');
+                    } else {
+                        // Remove from favorites
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        showNotification('Removed from favorites');
+                    }
+                });
+            });
+            
+            // Download button functionality
+            const downloadButtons = document.querySelectorAll('.dataset-actions .icon-btn:first-child');
+            
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Get dataset name from parent card
+                    const datasetCard = this.closest('.dataset-card');
+                    const datasetName = datasetCard.querySelector('h3').textContent;
+                    
+                    // In a real application, this would initiate a download
+                    console.log(`Downloading ${datasetName}`);
+                    
+                    // Show notification
+                    showNotification(`Downloading ${datasetName}`);
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('search-datasets');
+            const searchBtn = document.querySelector('.search-btn');
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.trim();
+                
+                if (searchTerm) {
+                    // In a real application, this would search for datasets
+                    console.log(`Searching for: ${searchTerm}`);
+                    
+                    // Show notification
+                    showNotification(`Searching for: ${searchTerm}`);
+                    
+                    // Simulate loading
+                    simulateLoading();
+                }
+            }
+            
+            searchBtn.addEventListener('click', performSearch);
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

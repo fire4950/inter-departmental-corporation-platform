@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inter-departmental Cooperation Platform</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.svg" alt="Platform Logo">
+            <h1>Inter-departmental Cooperation Platform</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="data-sharing.html"><i class="fas fa-database"></i> Data Sharing</a></li>
+                <li><a href="resource-allocation.html"><i class="fas fa-share-alt"></i> Resource Allocation</a></li>
+                <li><a href="project-planning.html"><i class="fas fa-project-diagram"></i> Project Planning</a></li>
+                <li><a href="implementation-tracking.html"><i class="fas fa-chart-line"></i> Implementation Tracking</a></li>
+            </ul>
+        </nav>
+        <div class="user-info">
+            <span class="user-name">Welcome, Admin</span>
+            <div class="user-avatar">
+                <img src="images/avatar.svg" alt="User Avatar">
+            </div>
+            <div class="dropdown">
+                <i class="fas fa-caret-down"></i>
+                <div class="dropdown-content">
+                    <a href="profile.html"><i class="fas fa-user-cog"></i> Profile</a>
+                    <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a>
+                    <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="department-selector">
+                <h3>Select Department</h3>
+                <select id="department-select" aria-label="Select Department">
+                    <option value="all">All Departments</option>
+                    <option value="water">Water Supply</option>
+                    <option value="transport">Transportation</option>
+                    <option value="electricity">Electricity</option>
+                    <option value="waste">Waste Management</option>
+                    <option value="urban">Urban Planning</option>
+                </select>
+            </div>
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="project-planning.html#meetings"><i class="fas fa-calendar-alt"></i> Upcoming Meetings</a></li>
+                    <li><a href="implementation-tracking.html#tasks"><i class="fas fa-tasks"></i> Pending Tasks</a></li>
+                    <li><a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li><a href="data-sharing.html#reports"><i class="fas fa-file-alt"></i> Reports</a></li>
+                </ul>
+            </div>
+            <div class="city-selector">
+                <h3>Select City</h3>
+                <select id="city-select" aria-label="Select City">
+                    <option value="delhi">New Delhi</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="bangalore">Bangalore</option>
+                    <option value="chennai">Chennai</option>
+                    <option value="kolkata">Kolkata</option>
+                    <option value="hyderabad">Hyderabad</option>
+                    <option value="pune">Pune</option>
+                </select>
+            </div>
+        </aside>
+
+        <main class="content">
+            <div class="dashboard-header">
+                <h2>Dashboard</h2>
+                <div class="date-filter">
+                    <label for="date-range">Date Range:</label>
+                    <select id="date-range" aria-label="Date Range">
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month" selected>This Month</option>
+                        <option value="quarter">This Quarter</option>
+                        <option value="year">This Year</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-project-diagram"></i></div>
+                    <div class="stat-info">
+                        <h3>Active Projects</h3>
+                        <p class="stat-number">24</p>
+                        <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 12% from last month</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-handshake"></i></div>
+                    <div class="stat-info">
+                        <h3>Collaborations</h3>
+                        <p class="stat-number">37</p>
+                        <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 8% from last month</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-database"></i></div>
+                    <div class="stat-info">
+                        <h3>Shared Datasets</h3>
+                        <p class="stat-number">156</p>
+                        <p class="stat-change positive"><i class="fas fa-arrow-up"></i> 15% from last month</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-info">
+                        <h3>Completed Tasks</h3>
+                        <p class="stat-number">89</p>
+                        <p class="stat-change negative"><i class="fas fa-arrow-down"></i> 3% from last month</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="grid-item project-status">
+                    <div class="item-header">
+                        <h3>Project Status</h3>
+                        <a href="implementation-tracking.html" class="view-all">View All</a>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-item">
+                            <div class="progress-info">
+                                <span class="project-name">Metro Line Extension</span>
+                                <span class="progress-percentage">75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-info">
+                                <span class="project-name">Smart Water Management</span>
+                                <span class="progress-percentage">45%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-info">
+                                <span class="project-name">Solar Power Grid</span>
+                                <span class="progress-percentage">90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-info">
+                                <span class="project-name">Waste Recycling Plant</span>
+                                <span class="progress-percentage">30%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-item recent-activities">
+                    <div class="item-header">
+                        <h3>Recent Activities</h3>
+                        <a href="notifications.html" class="view-all">View All</a>
+                    </div>
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon"><i class="fas fa-file-upload"></i></div>
+                            <div class="activity-details">
+                                <p class="activity-text">Water Department uploaded new dataset</p>
+                                <p class="activity-time">2 hours ago</p>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon"><i class="fas fa-comment-alt"></i></div>
+                            <div class="activity-details">
+                                <p class="activity-text">New comment on Road Repair Project</p>
+                                <p class="activity-time">5 hours ago</p>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon"><i class="fas fa-handshake"></i></div>
+                            <div class="activity-details">
+                                <p class="activity-text">New collaboration between Transport and Urban Planning</p>
+                                <p class="activity-time">Yesterday</p>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon"><i class="fas fa-tasks"></i></div>
+                            <div class="activity-details">
+                                <p class="activity-text">Task "Budget Allocation" marked as complete</p>
+                                <p class="activity-time">Yesterday</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="grid-item upcoming-meetings">
+                    <div class="item-header">
+                        <h3>Upcoming Meetings</h3>
+                        <a href="project-planning.html#meetings" class="view-all">View All</a>
+                    </div>
+                    <ul class="meeting-list">
+                        <li class="meeting-item">
+                            <div class="meeting-date">
+                                <span class="day">15</span>
+                                <span class="month">Jun</span>
+                            </div>
+                            <div class="meeting-details">
+                                <h4>Project Coordination Meeting</h4>
+                                <p><i class="fas fa-clock"></i> 10:00 AM - 11:30 AM</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Conference Room A</p>
+                                <div class="meeting-departments">
+                                    <span class="department-tag">Water</span>
+                                    <span class="department-tag">Transport</span>
+                                    <span class="department-tag">Urban</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="meeting-item">
+                            <div class="meeting-date">
+                                <span class="day">18</span>
+                                <span class="month">Jun</span>
+                            </div>
+                            <div class="meeting-details">
+                                <h4>Budget Review</h4>
+                                <p><i class="fas fa-clock"></i> 2:00 PM - 4:00 PM</p>
+                                <p><i class="fas fa-map-marker-alt"></i> Virtual Meeting</p>
+                                <div class="meeting-departments">
+                                    <span class="department-tag">All</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="grid-item resource-allocation">
+                    <div class="item-header">
+                        <h3>Resource Allocation</h3>
+                        <a href="resource-allocation.html" class="view-all">View All</a>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="resourceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About the Platform</h4>
+                <p>A unified platform for inter-departmental cooperation in Indian cities, facilitating data sharing, resource allocation, and project implementation.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="settings.html#advanced">API Access</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><i class="fas fa-envelope"></i> support@idcp.gov.in</p>
+                <p><i class="fas fa-phone"></i> +91 11 2345 6789</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Inter-departmental Cooperation Platform | Ministry of Urban Development, Government of India</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 

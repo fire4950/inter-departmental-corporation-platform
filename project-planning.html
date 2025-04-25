@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Planning - Inter-departmental Cooperation Platform</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.svg" alt="Platform Logo">
+            <h1>Inter-departmental Cooperation Platform</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="data-sharing.html"><i class="fas fa-database"></i> Data Sharing</a></li>
+                <li><a href="resource-allocation.html"><i class="fas fa-share-alt"></i> Resource Allocation</a></li>
+                <li><a href="project-planning.html" class="active"><i class="fas fa-project-diagram"></i> Project Planning</a></li>
+                <li><a href="implementation-tracking.html"><i class="fas fa-chart-line"></i> Implementation Tracking</a></li>
+            </ul>
+        </nav>
+        <div class="user-info">
+            <span class="user-name">Welcome, Admin</span>
+            <div class="user-avatar">
+                <img src="images/avatar.svg" alt="User Avatar">
+            </div>
+            <div class="dropdown">
+                <i class="fas fa-caret-down"></i>
+                <div class="dropdown-content">
+                    <a href="profile.html"><i class="fas fa-user-cog"></i> Profile</a>
+                    <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="department-selector">
+                <h3>Select Department</h3>
+                <select id="department-select" aria-label="Select Department">
+                    <option value="all">All Departments</option>
+                    <option value="water">Water Supply</option>
+                    <option value="transport">Transportation</option>
+                    <option value="electricity">Electricity</option>
+                    <option value="waste">Waste Management</option>
+                    <option value="urban">Urban Planning</option>
+                </select>
+            </div>
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="project-planning.html#new-project"><i class="fas fa-plus-circle"></i> New Project</a></li>
+                    <li><a href="project-planning.html#tasks"><i class="fas fa-tasks"></i> My Tasks</a></li>
+                    <li><a href="project-planning.html#calendar"><i class="fas fa-calendar-alt"></i> Project Calendar</a></li>
+                    <li><a href="project-planning.html#templates"><i class="fas fa-file-alt"></i> Project Templates</a></li>
+                </ul>
+            </div>
+            <div class="city-selector">
+                <h3>Select City</h3>
+                <select id="city-select" aria-label="Select City">
+                    <option value="delhi">New Delhi</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="bangalore">Bangalore</option>
+                    <option value="chennai">Chennai</option>
+                    <option value="kolkata">Kolkata</option>
+                    <option value="hyderabad">Hyderabad</option>
+                    <option value="pune">Pune</option>
+                </select>
+            </div>
+        </aside>
+
+        <main class="content">
+            <div class="dashboard-header">
+                <h2>Project Planning</h2>
+                <div class="view-selector">
+                    <button class="view-btn active" data-view="grid" aria-label="Grid View"><i class="fas fa-th-large"></i></button>
+                    <button class="view-btn" data-view="list" aria-label="List View"><i class="fas fa-list"></i></button>
+                    <button class="view-btn" data-view="gantt" aria-label="Gantt View"><i class="fas fa-chart-bar"></i></button>
+                </div>
+            </div>
+
+            <div class="project-filters">
+                <div class="filter-group">
+                    <label for="status-filter">Status:</label>
+                    <select id="status-filter" aria-label="Filter by Status">
+                        <option value="all">All</option>
+                        <option value="planning">Planning</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="on-hold">On Hold</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="priority-filter">Priority:</label>
+                    <select id="priority-filter" aria-label="Filter by Priority">
+                        <option value="all">All</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="search-projects">Search:</label>
+                    <input type="text" id="search-projects" placeholder="Search projects..." aria-label="Search projects">
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="primary-btn" aria-label="Create New Project"><i class="fas fa-plus"></i> New Project</button>
+                <button class="secondary-btn" aria-label="Import Project"><i class="fas fa-file-import"></i> Import</button>
+                <button class="secondary-btn" aria-label="Export Projects"><i class="fas fa-file-export"></i> Export</button>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-priority high">High Priority</span>
+                        <div class="project-actions">
+                            <button class="icon-btn" aria-label="Edit Project"><i class="fas fa-edit"></i></button>
+                            <button class="icon-btn" aria-label="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Metro Line Extension</h3>
+                    <div class="project-info">
+                        <p><i class="fas fa-info-circle"></i> Extension of metro line from City Center to Eastern Suburbs</p>
+                        <p><i class="fas fa-calendar-alt"></i> Jan 2023 - Dec 2025</p>
+                        <p><i class="fas fa-money-bill-wave"></i> Budget: ₹ 450 Crores</p>
+                    </div>
+                    <div class="project-departments">
+                        <span class="department-tag">Transport</span>
+                        <span class="department-tag">Urban</span>
+                        <span class="department-tag">Electricity</span>
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-info">
+                            <span>Progress</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <div class="project-team">
+                        <div class="team-member" aria-label="Team Member: Rajesh Kumar">RK</div>
+                        <div class="team-member" aria-label="Team Member: Priya Singh">PS</div>
+                        <div class="team-member" aria-label="Team Member: Amit Patel">AP</div>
+                        <div class="team-member more" aria-label="5 more team members">+5</div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-priority medium">Medium Priority</span>
+                        <div class="project-actions">
+                            <button class="icon-btn" aria-label="Edit Project"><i class="fas fa-edit"></i></button>
+                            <button class="icon-btn" aria-label="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Smart Water Management</h3>
+                    <div class="project-info">
+                        <p><i class="fas fa-info-circle"></i> Implementation of IoT-based water management system</p>
+                        <p><i class="fas fa-calendar-alt"></i> Mar 2023 - Sep 2024</p>
+                        <p><i class="fas fa-money-bill-wave"></i> Budget: ₹ 120 Crores</p>
+                    </div>
+                    <div class="project-departments">
+                        <span class="department-tag">Water</span>
+                        <span class="department-tag">Electricity</span>
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-info">
+                            <span>Progress</span>
+                            <span>45%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 45%;"></div>
+                        </div>
+                    </div>
+                    <div class="project-team">
+                        <div class="team-member" aria-label="Team Member: Neha Sharma">NS</div>
+                        <div class="team-member" aria-label="Team Member: Vikram Reddy">VR</div>
+                        <div class="team-member" aria-label="Team Member: Sanjay Gupta">SG</div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-priority high">High Priority</span>
+                        <div class="project-actions">
+                            <button class="icon-btn" aria-label="Edit Project"><i class="fas fa-edit"></i></button>
+                            <button class="icon-btn" aria-label="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Solar Power Grid</h3>
+                    <div class="project-info">
+                        <p><i class="fas fa-info-circle"></i> Installation of solar panels on government buildings</p>
+                        <p><i class="fas fa-calendar-alt"></i> Feb 2023 - Aug 2023</p>
+                        <p><i class="fas fa-money-bill-wave"></i> Budget: ₹ 85 Crores</p>
+                    </div>
+                    <div class="project-departments">
+                        <span class="department-tag">Electricity</span>
+                        <span class="department-tag">Urban</span>
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-info">
+                            <span>Progress</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div class="project-team">
+                        <div class="team-member" aria-label="Team Member: Rahul Verma">RV</div>
+                        <div class="team-member" aria-label="Team Member: Deepa Nair">DN</div>
+                        <div class="team-member more" aria-label="3 more team members">+3</div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="project-priority low">Low Priority</span>
+                        <div class="project-actions">
+                            <button class="icon-btn" aria-label="Edit Project"><i class="fas fa-edit"></i></button>
+                            <button class="icon-btn" aria-label="More Options"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+                    </div>
+                    <h3 class="project-title">Waste Recycling Plant</h3>
+                    <div class="project-info">
+                        <p><i class="fas fa-info-circle"></i> Construction of new waste recycling facility</p>
+                        <p><i class="fas fa-calendar-alt"></i> Apr 2023 - Oct 2024</p>
+                        <p><i class="fas fa-money-bill-wave"></i> Budget: ₹ 75 Crores</p>
+                    </div>
+                    <div class="project-departments">
+                        <span class="department-tag">Waste</span>
+                        <span class="department-tag">Urban</span>
+                    </div>
+                    <div class="project-progress">
+                        <div class="progress-info">
+                            <span>Progress</span>
+                            <span>30%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 30%;"></div>
+                        </div>
+                    </div>
+                    <div class="project-team">
+                        <div class="team-member" aria-label="Team Member: Kiran Joshi">KJ</div>
+                        <div class="team-member" aria-label="Team Member: Meera Patel">MP</div>
+                        <div class="team-member" aria-label="Team Member: Arjun Singh">AS</div>
+                        <div class="team-member more" aria-label="2 more team members">+2</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <button class="pagination-btn" aria-label="Previous Page"><i class="fas fa-chevron-left"></i></button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <span class="pagination-ellipsis">...</span>
+                <button class="pagination-btn">8</button>
+                <button class="pagination-btn" aria-label="Next Page"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="project-modal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h3>New Project</h3>
+                <button class="close-btn" aria-label="Close Modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="project-name">Project Name</label>
+                        <input type="text" id="project-name" placeholder="Enter project name">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-priority">Priority</label>
+                        <select id="project-priority" aria-label="Select Priority">
+                            <option value="high">High</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="project-description">Description</label>
+                    <textarea id="project-description" rows="3" placeholder="Describe the project..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="project-start-date">Start Date</label>
+                        <input type="date" id="project-start-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-end-date">End Date</label>
+                        <input type="date" id="project-end-date">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="project-budget">Budget (₹)</label>
+                        <input type="number" id="project-budget" min="0" step="1000000" value="10000000">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-manager">Project Manager</label>
+                        <select id="project-manager" aria-label="Select Project Manager">
+                            <option value="rajesh">Rajesh Kumar</option>
+                            <option value="priya">Priya Singh</option>
+                            <option value="amit">Amit Patel</option>
+                            <option value="neha">Neha Sharma</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="project-departments">Departments Involved</label>
+                    <select id="project-departments" multiple aria-label="Select Departments">
+                        <option value="water">Water Supply</option>
+                        <option value="transport">Transportation</option>
+                        <option value="electricity">Electricity</option>
+                        <option value="waste">Waste Management</option>
+                        <option value="urban">Urban Planning</option>
+                    </select>
+                    <small>Hold Ctrl/Cmd to select multiple departments</small>
+                </div>
+                <div class="form-group">
+                    <label for="project-team">Team Members</label>
+                    <select id="project-team" multiple aria-label="Select Team Members">
+                        <option value="rajesh">Rajesh Kumar (Transport)</option>
+                        <option value="priya">Priya Singh (Urban)</option>
+                        <option value="amit">Amit Patel (Electricity)</option>
+                        <option value="neha">Neha Sharma (Water)</option>
+                        <option value="vikram">Vikram Reddy (Water)</option>
+                        <option value="sanjay">Sanjay Gupta (Electricity)</option>
+                        <option value="rahul">Rahul Verma (Electricity)</option>
+                        <option value="deepa">Deepa Nair (Urban)</option>
+                        <option value="kiran">Kiran Joshi (Waste)</option>
+                        <option value="meera">Meera Patel (Waste)</option>
+                        <option value="arjun">Arjun Singh (Urban)</option>
+                    </select>
+                    <small>Hold Ctrl/Cmd to select multiple team members</small>
+                </div>
+                <div class="form-group">
+                    <label for="project-milestones">Key Milestones</label>
+                    <div id="milestones-container">
+                        <div class="milestone-row">
+                            <input type="text" placeholder="Milestone name" aria-label="Milestone name">
+                            <input type="date" aria-label="Milestone date">
+                            <button type="button" class="icon-btn remove-milestone" aria-label="Remove Milestone"><i class="fas fa-minus-circle"></i></button>
+                        </div>
+                    </div>
+                    <button type="button" class="add-milestone-btn" aria-label="Add Milestone"><i class="fas fa-plus-circle"></i> Add Milestone</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" aria-label="Cancel Project Creation">Cancel</button>
+                <button class="primary-btn" aria-label="Create Project">Create Project</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About the Platform</h4>
+                <p>A unified platform for inter-departmental cooperation in Indian cities, facilitating data sharing, resource allocation, and project implementation.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="settings.html#advanced">API Access</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><i class="fas fa-envelope"></i> support@idcp.gov.in</p>
+                <p><i class="fas fa-phone"></i> +91 11 2345 6789</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Inter-departmental Cooperation Platform | Ministry of Urban Development, Government of India</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Project Planning specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // View switching functionality
+            const viewButtons = document.querySelectorAll('.view-btn');
+            
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    viewButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // In a real application, this would change the view
+                    const viewType = this.getAttribute('data-view');
+                    console.log(`Switching to ${viewType} view`);
+                    
+                    // Show notification
+                    showNotification(`Switched to ${viewType} view`);
+                    
+                    // Simulate loading
+                    simulateLoading();
+                });
+            });
+            
+            // Filter functionality
+            const statusFilter = document.getElementById('status-filter');
+            const priorityFilter = document.getElementById('priority-filter');
+            const searchInput = document.getElementById('search-projects');
+            
+            function applyFilters() {
+                const status = statusFilter.value;
+                const priority = priorityFilter.value;
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                
+                // In a real application, this would filter the projects
+                console.log(`Filtering projects - Status: ${status}, Priority: ${priority}, Search: ${searchTerm}`);
+                
+                // Show notification
+                showNotification('Filters applied');
+                
+                // Simulate loading
+                simulateLoading();
+            }
+            
+            statusFilter.addEventListener('change', applyFilters);
+            priorityFilter.addEventListener('change', applyFilters);
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    applyFilters();
+                }
+            });
+            
+            // New Project button functionality
+            const newProjectBtn = document.querySelector('.action-buttons .primary-btn');
+            const projectModal = document.getElementById('project-modal');
+            const closeModalBtn = projectModal.querySelector('.close-btn');
+            const cancelBtn = projectModal.querySelector('.secondary-btn');
+            const createBtn = projectModal.querySelector('.primary-btn');
+            
+            newProjectBtn.addEventListener('click', function() {
+                // Show modal
+                projectModal.style.display = 'flex';
+                
+                // Set default dates
+                const today = new Date();
+                const sixMonthsLater = new Date(today);
+                sixMonthsLater.setMonth(today.getMonth() + 6);
+                
+                document.getElementById('project-start-date').value = today.toISOString().split('T')[0];
+                document.getElementById('project-end-date').value = sixMonthsLater.toISOString().split('T')[0];
+            });
+            
+            // Close modal functionality
+            function closeModal() {
+                projectModal.style.display = 'none';
+            }
+            
+            closeModalBtn.addEventListener('click', closeModal);
+            cancelBtn.addEventListener('click', closeModal);
+            
+            // Create project functionality
+            createBtn.addEventListener('click', function() {
+                // Get form values
+                const name = document.getElementById('project-name').value;
+                const priority = document.getElementById('project-priority').value;
+                const startDate = document.getElementById('project-start-date').value;
+                const endDate = document.getElementById('project-end-date').value;
+                
+                // Validate form
+                if (!name) {
+                    showNotification('Please enter a project name', 'error');
+                    return;
+                }
+                
+                if (!startDate || !endDate) {
+                    showNotification('Please select start and end dates', 'error');
+                    return;
+                }
+                
+                // In a real application, this would make an API call to create a project
+                console.log(`Creating new project: ${name}, Priority: ${priority}, Dates: ${startDate} to ${endDate}`);
+                
+                // Close modal
+                closeModal();
+                
+                // Show notification
+                showNotification('Project created successfully');
+                
+                // Simulate loading
+                simulateLoading();
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === projectModal) {
+                    closeModal();
+                }
+            });
+            
+            // Add milestone functionality
+            const addMilestoneBtn = document.querySelector('.add-milestone-btn');
+            const milestonesContainer = document.getElementById('milestones-container');
+            
+            addMilestoneBtn.addEventListener('click', function() {
+                const milestoneRow = document.createElement('div');
+                milestoneRow.className = 'milestone-row';
+                milestoneRow.innerHTML = `
+                    <input type="text" placeholder="Milestone name" aria-label="Milestone name">
+                    <input type="date" aria-label="Milestone date">
+                    <button type="button" class="icon-btn remove-milestone" aria-label="Remove Milestone"><i class="fas fa-minus-circle"></i></button>
+                `;
+                
+                milestonesContainer.appendChild(milestoneRow);
+                
+                // Add event listener to remove button
+                const removeBtn = milestoneRow.querySelector('.remove-milestone');
+                removeBtn.addEventListener('click', function() {
+                    milestoneRow.remove();
+                });
+            });
+            
+            // Project card actions
+            const editButtons = document.querySelectorAll('.project-card .project-actions .icon-btn:first-child');
+            const moreButtons = document.querySelectorAll('.project-card .project-actions .icon-btn:last-child');
+            
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Get project title
+                    const projectCard = this.closest('.project-card');
+                    const projectTitle = projectCard.querySelector('.project-title').textContent;
+                    
+                    // In a real application, this would open the edit form
+                    console.log(`Editing project: ${projectTitle}`);
+                    
+                    // Show notification
+                    showNotification(`Editing project: ${projectTitle}`);
+                });
+            });
+            
+            moreButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Get project title
+                    const projectCard = this.closest('.project-card');
+                    const projectTitle = projectCard.querySelector('.project-title').textContent;
+                    
+                    // In a real application, this would show a dropdown menu
+                    console.log(`More options for project: ${projectTitle}`);
+                    
+                    // Show notification
+                    showNotification(`More options menu for ${projectTitle}`);
+                });
+            });
+            
+            // Import/Export buttons functionality
+            const importBtn = document.querySelector('.action-buttons .secondary-btn:nth-child(2)');
+            const exportBtn = document.querySelector('.action-buttons .secondary-btn:nth-child(3)');
+            
+            importBtn.addEventListener('click', function() {
+                // In a real application, this would open a file picker
+                console.log('Importing projects');
+                
+                // Show notification
+                showNotification('Import functionality coming soon');
+            });
+            
+            exportBtn.addEventListener('click', function() {
+                // In a real application, this would export projects
+                console.log('Exporting projects');
+                
+                // Show notification
+                showNotification('Exporting projects, please wait...');
+                
+                // Simulate loading
+                simulateLoading();
+                
+                // Show download notification after a delay
+                setTimeout(() => {
+                    showNotification('Projects exported successfully. Downloading...');
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html> 

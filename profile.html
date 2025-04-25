@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Inter-departmental Cooperation Platform</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/visibility-fix.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .profile-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+        
+        .profile-sidebar {
+            background-color: var(--bg-light);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+        
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid var(--bg-light);
+            box-shadow: var(--shadow);
+        }
+        
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-avatar .edit-avatar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            transform: translateY(100%);
+        }
+        
+        .profile-avatar:hover .edit-avatar {
+            transform: translateY(0);
+        }
+        
+        .profile-name {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-name h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        
+        .profile-name p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .profile-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        .profile-info {
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        
+        .info-item i {
+            width: 20px;
+            margin-right: 0.75rem;
+            color: var(--primary-color);
+        }
+        
+        .info-item span {
+            font-size: 0.9rem;
+        }
+        
+        .profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .profile-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .profile-section {
+            background-color: var(--bg-light);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .section-header h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .section-header button {
+            font-size: 0.9rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .activity-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .timeline-item {
+            display: flex;
+            position: relative;
+        }
+        
+        .timeline-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(26, 115, 232, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--primary-color);
+            flex-shrink: 0;
+            z-index: 1;
+        }
+        
+        .timeline-content {
+            flex: 1;
+            padding-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -20px;
+            width: 2px;
+            height: 100%;
+            background-color: var(--border-color);
+        }
+        
+        .timeline-item:last-child .timeline-content {
+            padding-bottom: 0;
+        }
+        
+        .timeline-item:last-child .timeline-content::before {
+            height: 18px;
+        }
+        
+        .timeline-date {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+        }
+        
+        .timeline-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        
+        .timeline-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .badge-primary {
+            background-color: rgba(26, 115, 232, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .badge-success {
+            background-color: rgba(52, 168, 83, 0.1);
+            color: var(--success-color);
+        }
+        
+        .badge-warning {
+            background-color: rgba(251, 188, 5, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .badge-danger {
+            background-color: rgba(234, 67, 53, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.svg" alt="Platform Logo">
+            <h1>Inter-departmental Cooperation Platform</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="data-sharing.html"><i class="fas fa-database"></i> Data Sharing</a></li>
+                <li><a href="resource-allocation.html"><i class="fas fa-share-alt"></i> Resource Allocation</a></li>
+                <li><a href="project-planning.html"><i class="fas fa-project-diagram"></i> Project Planning</a></li>
+                <li><a href="implementation-tracking.html"><i class="fas fa-chart-line"></i> Implementation Tracking</a></li>
+            </ul>
+        </nav>
+        <div class="user-info">
+            <span class="user-name">Welcome, Admin</span>
+            <div class="user-avatar">
+                <img src="images/avatar.svg" alt="User Avatar">
+            </div>
+            <div class="dropdown">
+                <i class="fas fa-caret-down"></i>
+                <div class="dropdown-content">
+                    <a href="profile.html" class="active"><i class="fas fa-user-cog"></i> Profile</a>
+                    <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a>
+                    <a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main class="content">
+            <div class="dashboard-header">
+                <h2>User Profile</h2>
+            </div>
+
+            <!-- Profile Content -->
+            <div class="profile-container">
+                <div class="profile-sidebar">
+                    <div class="profile-avatar">
+                        <img src="images/avatar.svg" alt="User Avatar">
+                        <div class="edit-avatar">
+                            <i class="fas fa-camera"></i> Change Photo
+                        </div>
+                    </div>
+                    <div class="profile-name">
+                        <h3>Rajesh Kumar</h3>
+                        <p>Project Manager</p>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24</div>
+                            <div class="stat-label">Datasets</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Teams</div>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="info-item">
+                            <i class="fas fa-building"></i>
+                            <span>Urban Planning Department</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>New Delhi</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>rajesh.kumar@idcp.gov.in</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 98765 43210</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Joined: June 15, 2022</span>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="primary-btn"><i class="fas fa-edit"></i> Edit Profile</button>
+                        <button class="secondary-btn"><i class="fas fa-key"></i> Change Password</button>
+                    </div>
+                </div>
+                
+                <div class="profile-content">
+                    <!-- Login Section -->
+                    <div class="profile-section">
+                        <div class="section-header">
+                            <h2>Login Options</h2>
+                        </div>
+                        <div class="user-type-selector">
+                            <button class="user-type-btn active" data-type="admin">
+                                <i class="fas fa-user-shield"></i>
+                                Admin
+                            </button>
+                            <button class="user-type-btn" data-type="department">
+                                <i class="fas fa-building"></i>
+                                Department Head
+                            </button>
+                        </div>
+
+                        <form id="profileLoginForm" class="profile-form">
+                            <!-- Department selection (hidden by default) -->
+                            <div class="form-group department-select" style="display: none;">
+                                <label for="department">Select Department</label>
+                                <select id="department" name="department">
+                                    <option value="">Choose your department</option>
+                                    <option value="water">Water Supply</option>
+                                    <option value="transport">Transportation</option>
+                                    <option value="electricity">Electricity</option>
+                                    <option value="waste">Waste Management</option>
+                                    <option value="urban">Urban Planning</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <div class="password-input">
+                                    <input type="password" id="password" name="password" required>
+                                    <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="profile-btn">
+                                <i class="fas fa-sign-in-alt"></i>
+                                Login
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Rest of the profile sections -->
+                    <div class="profile-section">
+                        <h2>Current Login Info</h2>
+                        <div id="currentLoginInfo" class="login-info">
+                            <p><strong>Login Type:</strong> <span id="currentLoginType">Loading...</span></p>
+                            <p><strong>Department:</strong> <span id="currentDepartment">Loading...</span></p>
+                            <p><strong>Last Updated:</strong> <span id="lastUpdate">Loading...</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <div class="section-header">
+                            <h3>Personal Information</h3>
+                            <button class="secondary-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="display-first-name">First Name</label>
+                                <input type="text" id="display-first-name" value="Rajesh" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="display-last-name">Last Name</label>
+                                <input type="text" id="display-last-name" value="Kumar" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="display-email">Email Address</label>
+                                <input type="email" id="display-email" value="rajesh.kumar@idcp.gov.in" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="display-phone">Phone Number</label>
+                                <input type="tel" id="display-phone" value="+91 98765 43210" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="display-bio">Bio</label>
+                            <textarea id="display-bio" rows="3" disabled>Project Manager with over 10 years of experience in urban planning and infrastructure development. Specializing in coordinating inter-departmental projects and resource allocation.</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <div class="section-header">
+                            <h3>Skills & Expertise</h3>
+                            <button class="secondary-btn"><i class="fas fa-plus"></i> Add Skills</button>
+                        </div>
+                        <div class="skills-container">
+                            <span class="badge badge-primary">Project Management</span>
+                            <span class="badge badge-primary">Urban Planning</span>
+                            <span class="badge badge-primary">Resource Allocation</span>
+                            <span class="badge badge-primary">Infrastructure Development</span>
+                            <span class="badge badge-primary">GIS</span>
+                            <span class="badge badge-primary">Data Analysis</span>
+                            <span class="badge badge-primary">Team Leadership</span>
+                            <span class="badge badge-primary">Stakeholder Management</span>
+                            <span class="badge badge-primary">Budget Planning</span>
+                            <span class="badge badge-primary">Risk Management</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <div class="section-header">
+                            <h3>Current Projects</h3>
+                            <button class="secondary-btn"><i class="fas fa-external-link-alt"></i> View All</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Project Name</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Progress</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Metro Line Extension</td>
+                                        <td>Project Manager</td>
+                                        <td><span class="badge badge-success">In Progress</span></td>
+                                        <td>
+                                            <div class="progress-bar">
+                                                <div class="progress" style="width: 75%;"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="icon-btn" aria-label="View Project"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Smart Water Management</td>
+                                        <td>Consultant</td>
+                                        <td><span class="badge badge-warning">At Risk</span></td>
+                                        <td>
+                                            <div class="progress-bar">
+                                                <div class="progress" style="width: 45%;"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="icon-btn" aria-label="View Project"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Solar Power Grid</td>
+                                        <td>Team Member</td>
+                                        <td><span class="badge badge-success">In Progress</span></td>
+                                        <td>
+                                            <div class="progress-bar">
+                                                <div class="progress" style="width: 60%;"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button class="icon-btn" aria-label="View Project"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-section">
+                        <div class="section-header">
+                            <h3>Recent Activity</h3>
+                            <button class="secondary-btn"><i class="fas fa-external-link-alt"></i> View All</button>
+                        </div>
+                        <div class="activity-timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-icon">
+                                    <i class="fas fa-file-upload"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">Today, 10:30 AM</div>
+                                    <div class="timeline-title">Uploaded a new dataset</div>
+                                    <div class="timeline-description">Uploaded "Urban Development Plan 2023" to the Data Sharing platform.</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon">
+                                    <i class="fas fa-comment"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">Yesterday, 3:45 PM</div>
+                                    <div class="timeline-title">Commented on a project</div>
+                                    <div class="timeline-description">Added a comment on "Metro Line Extension" project milestone.</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">July 10, 2023, 11:20 AM</div>
+                                    <div class="timeline-title">Updated project status</div>
+                                    <div class="timeline-description">Changed the status of "Foundation Work" milestone to 75% complete.</div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon">
+                                    <i class="fas fa-share-alt"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">July 8, 2023, 2:15 PM</div>
+                                    <div class="timeline-title">Shared a dataset</div>
+                                    <div class="timeline-description">Shared "Traffic Analysis Report" with Transportation Department.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About the Platform</h4>
+                <p>A unified platform for inter-departmental cooperation in Indian cities, facilitating data sharing, resource allocation, and project implementation.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="settings.html#advanced">API Access</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><i class="fas fa-envelope"></i> support@idcp.gov.in</p>
+                <p><i class="fas fa-phone"></i> +91 11 2345 6789</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Inter-departmental Cooperation Platform | Ministry of Urban Development, Government of India</p>
+        </div>
+    </footer>
+
+    <div class="modal" id="edit-profile-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Profile</h3>
+                <button class="close-btn" aria-label="Close Modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" value="Rajesh">
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" value="Kumar">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" value="rajesh.kumar@idcp.gov.in">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" value="+91 98765 43210">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" rows="3">Project Manager with over 10 years of experience in urban planning and infrastructure development. Specializing in coordinating inter-departmental projects and resource allocation.</textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" aria-label="Cancel">Cancel</button>
+                <button class="primary-btn" aria-label="Save Changes">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/profile.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userTypeButtons = document.querySelectorAll('.user-type-btn');
+            const departmentSelect = document.querySelector('.department-select');
+            const loginForm = document.getElementById('profileLoginForm');
+
+            // Handle user type selection
+            userTypeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    userTypeButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (this.dataset.type === 'department') {
+                        departmentSelect.style.display = 'block';
+                    } else {
+                        departmentSelect.style.display = 'none';
+                    }
+                });
+            });
+
+            // Handle login form submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const userType = document.querySelector('.user-type-btn.active').dataset.type;
+                const department = document.getElementById('department').value;
+
+                // Show loading state
+                const button = loginForm.querySelector('button');
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+                button.disabled = true;
+
+                // Simulate API call
+                setTimeout(() => {
+                    const userData = {
+                        id: 1,
+                        email: email,
+                        name: email.split('@')[0],
+                        avatar: 'images/default-avatar.png',
+                        department: userType === 'department' ? department : 'Administration',
+                        role: userType === 'admin' ? 'Admin' : 'Department Head'
+                    };
+
+                    // Store user data
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    localStorage.setItem('isLoggedIn', 'true');
+
+                    // Update profile information
+                    document.querySelector('.profile-name h3').textContent = userData.name;
+                    document.querySelector('.profile-name p').textContent = userData.department;
+                    document.querySelector('.profile-avatar img').src = userData.avatar;
+                    
+                    // Update profile info section
+                    document.querySelector('.info-item:nth-child(1) span').textContent = userData.email;
+                    document.querySelector('.info-item:nth-child(2) span').textContent = userData.department;
+                    document.querySelector('.info-item:nth-child(3) span').textContent = userData.role;
+
+                    // Show success message
+                    alert('Login successful!');
+                }, 1500);
+            });
+
+            // Handle logout
+            document.querySelector('.logout-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('userData');
+                localStorage.removeItem('isLoggedIn');
+                window.location.reload();
+            });
+        });
+    </script>
+</body>
+</html> 

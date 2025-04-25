@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Images</title>
+</head>
+<body>
+    <h1>Image Generator</h1>
+    <p>Right-click on the images below and select "Save image as..." to save them to your images folder.</p>
+    
+    <h2>Logo</h2>
+    <canvas id="logoCanvas" width="200" height="200"></canvas>
+    
+    <h2>Avatar</h2>
+    <canvas id="avatarCanvas" width="200" height="200"></canvas>
+    
+    <script>
+        // Create Logo
+        const logoCanvas = document.getElementById('logoCanvas');
+        const logoCtx = logoCanvas.getContext('2d');
+        
+        // Background
+        logoCtx.fillStyle = '#1a73e8';
+        logoCtx.fillRect(0, 0, 200, 200);
+        
+        // Text
+        logoCtx.fillStyle = 'white';
+        logoCtx.font = 'bold 40px Arial';
+        logoCtx.textAlign = 'center';
+        logoCtx.fillText('IDCP', 100, 110);
+        
+        logoCtx.font = 'bold 16px Arial';
+        logoCtx.fillText('Inter-departmental', 100, 140);
+        logoCtx.fillText('Cooperation Platform', 100, 160);
+        
+        // Create Avatar
+        const avatarCanvas = document.getElementById('avatarCanvas');
+        const avatarCtx = avatarCanvas.getContext('2d');
+        
+        // Background
+        avatarCtx.fillStyle = '#f5f7fa';
+        avatarCtx.fillRect(0, 0, 200, 200);
+        
+        // Circle
+        avatarCtx.beginPath();
+        avatarCtx.arc(100, 100, 80, 0, Math.PI * 2);
+        avatarCtx.fillStyle = '#4285f4';
+        avatarCtx.fill();
+        
+        // User silhouette
+        avatarCtx.beginPath();
+        avatarCtx.arc(100, 80, 40, 0, Math.PI * 2);
+        avatarCtx.fillStyle = 'white';
+        avatarCtx.fill();
+        
+        avatarCtx.beginPath();
+        avatarCtx.moveTo(100, 120);
+        avatarCtx.bezierCurveTo(60, 120, 40, 160, 40, 200);
+        avatarCtx.lineTo(160, 200);
+        avatarCtx.bezierCurveTo(160, 160, 140, 120, 100, 120);
+        avatarCtx.fillStyle = 'white';
+        avatarCtx.fill();
+    </script>
+</body>
+</html> 

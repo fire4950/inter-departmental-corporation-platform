@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Inter-departmental Cooperation Platform</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .settings-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 1.5rem;
+        }
+        
+        .settings-sidebar {
+            background-color: var(--bg-light);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            height: fit-content;
+        }
+        
+        .settings-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .settings-nav a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+        
+        .settings-nav a:hover {
+            background-color: rgba(26, 115, 232, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .settings-nav a.active {
+            background-color: rgba(26, 115, 232, 0.1);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .settings-nav a i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .settings-content {
+            background-color: var(--bg-light);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+        }
+        
+        .settings-section {
+            margin-bottom: 2rem;
+        }
+        
+        .settings-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .settings-header h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--primary-color);
+        }
+        
+        input:focus + .toggle-slider {
+            box-shadow: 0 0 1px var(--primary-color);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-info {
+            flex: 1;
+        }
+        
+        .setting-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        
+        .setting-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .setting-control {
+            margin-left: 1.5rem;
+        }
+        
+        .color-scheme-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .color-option.active {
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .language-select {
+            min-width: 150px;
+        }
+        
+        .danger-zone {
+            background-color: rgba(234, 67, 53, 0.05);
+            border: 1px solid rgba(234, 67, 53, 0.2);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+        }
+        
+        .danger-zone .setting-title {
+            color: var(--danger-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.svg" alt="Platform Logo">
+            <h1>Inter-departmental Cooperation Platform</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="data-sharing.html"><i class="fas fa-database"></i> Data Sharing</a></li>
+                <li><a href="resource-allocation.html"><i class="fas fa-share-alt"></i> Resource Allocation</a></li>
+                <li><a href="project-planning.html"><i class="fas fa-project-diagram"></i> Project Planning</a></li>
+                <li><a href="implementation-tracking.html"><i class="fas fa-chart-line"></i> Implementation Tracking</a></li>
+            </ul>
+        </nav>
+        <div class="user-info">
+            <span class="user-name">Welcome, Admin</span>
+            <div class="user-avatar">
+                <img src="images/avatar.svg" alt="User Avatar">
+            </div>
+            <div class="dropdown">
+                <i class="fas fa-caret-down"></i>
+                <div class="dropdown-content">
+                    <a href="profile.html"><i class="fas fa-user-cog"></i> Profile</a>
+                    <a href="settings.html" class="active"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a>
+                    <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main class="content">
+            <div class="dashboard-header">
+                <h2>Settings</h2>
+            </div>
+
+            <div class="settings-container">
+                <div class="settings-sidebar">
+                    <div class="settings-nav">
+                        <a href="#account" class="active"><i class="fas fa-user-circle"></i> Account</a>
+                        <a href="#appearance"><i class="fas fa-palette"></i> Appearance</a>
+                        <a href="#notifications"><i class="fas fa-bell"></i> Notifications</a>
+                        <a href="#privacy"><i class="fas fa-shield-alt"></i> Privacy & Security</a>
+                        <a href="#accessibility"><i class="fas fa-universal-access"></i> Accessibility</a>
+                        <a href="#language"><i class="fas fa-language"></i> Language</a>
+                        <a href="#advanced"><i class="fas fa-sliders-h"></i> Advanced</a>
+                    </div>
+                </div>
+                
+                <div class="settings-content">
+                    <div id="account" class="settings-section">
+                        <div class="settings-header">
+                            <h3>Account Settings</h3>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Email Address</div>
+                                <div class="setting-description">rajesh.kumar@idcp.gov.in</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="secondary-btn">Change</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Password</div>
+                                <div class="setting-description">Last changed 3 months ago</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="secondary-btn">Change</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Two-Factor Authentication</div>
+                                <div class="setting-description">Add an extra layer of security to your account</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="two-factor-auth" aria-label="Toggle Two-Factor Authentication">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="appearance" class="settings-section">
+                        <div class="settings-header">
+                            <h3>Appearance</h3>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Theme</div>
+                                <div class="setting-description">Choose between light and dark mode</div>
+                            </div>
+                            <div class="setting-control">
+                                <select id="theme-select" aria-label="Select Theme">
+                                    <option value="light">Light</option>
+                                    <option value="dark">Dark</option>
+                                    <option value="system">System Default</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Color Scheme</div>
+                                <div class="setting-description">Choose your preferred accent color</div>
+                                <div class="color-scheme-options">
+                                    <div class="color-option active" style="background-color: #1a73e8;" aria-label="Blue"></div>
+                                    <div class="color-option" style="background-color: #34a853;" aria-label="Green"></div>
+                                    <div class="color-option" style="background-color: #ea4335;" aria-label="Red"></div>
+                                    <div class="color-option" style="background-color: #fbbc05;" aria-label="Yellow"></div>
+                                    <div class="color-option" style="background-color: #9c27b0;" aria-label="Purple"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Compact Mode</div>
+                                <div class="setting-description">Reduce spacing to show more content</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="compact-mode" aria-label="Toggle Compact Mode">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="notifications" class="settings-section">
+                        <div class="settings-header">
+                            <h3>Notification Settings</h3>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Email Notifications</div>
+                                <div class="setting-description">Receive email notifications for important updates</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked id="email-notifications" aria-label="Toggle Email Notifications">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Browser Notifications</div>
+                                <div class="setting-description">Receive notifications in your browser</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked id="browser-notifications" aria-label="Toggle Browser Notifications">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Project Updates</div>
+                                <div class="setting-description">Get notified about changes to projects you're involved in</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked id="project-updates" aria-label="Toggle Project Update Notifications">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Resource Allocation</div>
+                                <div class="setting-description">Get notified about resource allocation requests and approvals</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked id="resource-notifications" aria-label="Toggle Resource Allocation Notifications">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Data Sharing</div>
+                                <div class="setting-description">Get notified when new data is shared with your department</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked id="data-notifications" aria-label="Toggle Data Sharing Notifications">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="privacy" class="settings-section">
+                        <div class="settings-header">
+                            <h3>Privacy & Security</h3>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Activity Log</div>
+                                <div class="setting-description">View and manage your account activity</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="secondary-btn">View Log</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Login Sessions</div>
+                                <div class="setting-description">Manage active sessions and devices</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="secondary-btn">Manage</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Data Privacy</div>
+                                <div class="setting-description">Manage how your data is used and shared</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="secondary-btn">Settings</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item danger-zone">
+                            <div class="setting-info">
+                                <div class="setting-title">Delete Account</div>
+                                <div class="setting-description">Permanently delete your account and all associated data</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="secondary-btn" style="color: var(--danger-color); border-color: var(--danger-color);">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="accessibility" class="settings-section">
+                        <div class="settings-header">
+                            <h3>Accessibility</h3>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Font Size</div>
+                                <div class="setting-description">Adjust the text size for better readability</div>
+                            </div>
+                            <div class="setting-control">
+                                <select id="font-size" aria-label="Select Font Size">
+                                    <option value="small">Small</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="large">Large</option>
+                                    <option value="x-large">Extra Large</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">High Contrast Mode</div>
+                                <div class="setting-description">Increase contrast for better visibility</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="high-contrast" aria-label="Toggle High Contrast Mode">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Reduce Motion</div>
+                                <div class="setting-description">Minimize animations and transitions</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="reduce-motion" aria-label="Toggle Reduce Motion">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="language" class="settings-section">
+                        <div class="settings-header">
+                            <h3>Language & Region</h3>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Language</div>
+                                <div class="setting-description">Select your preferred language</div>
+                            </div>
+                            <div class="setting-control">
+                                <select id="language-select" class="language-select" aria-label="Select Language">
+                                    <option value="en">English</option>
+                                    <option value="hi">Hindi</option>
+                                    <option value="bn">Bengali</option>
+                                    <option value="te">Telugu</option>
+                                    <option value="mr">Marathi</option>
+                                    <option value="ta">Tamil</option>
+                                    <option value="gu">Gujarati</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Time Zone</div>
+                                <div class="setting-description">Set your local time zone</div>
+                            </div>
+                            <div class="setting-control">
+                                <select id="timezone-select" class="language-select" aria-label="Select Time Zone">
+                                    <option value="IST">India Standard Time (IST)</option>
+                                    <option value="UTC">Coordinated Universal Time (UTC)</option>
+                                    <option value="EST">Eastern Standard Time (EST)</option>
+                                    <option value="PST">Pacific Standard Time (PST)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Date Format</div>
+                                <div class="setting-description">Choose how dates are displayed</div>
+                            </div>
+                            <div class="setting-control">
+                                <select id="date-format" aria-label="Select Date Format">
+                                    <option value="dd-mm-yyyy">DD-MM-YYYY</option>
+                                    <option value="mm-dd-yyyy">MM-DD-YYYY</option>
+                                    <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="advanced" class="settings-section">
+                        <div class="settings-header">
+                            <h3>Advanced Settings</h3>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Data Caching</div>
+                                <div class="setting-description">Cache data locally for faster access</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked id="data-caching" aria-label="Toggle Data Caching">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">API Access</div>
+                                <div class="setting-description">Manage API keys and access</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="secondary-btn">Manage</button>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <div class="setting-title">Export Data</div>
+                                <div class="setting-description">Export all your data in a downloadable format</div>
+                            </div>
+                            <div class="setting-control">
+                                <button class="secondary-btn">Export</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About the Platform</h4>
+                <p>A unified platform for inter-departmental cooperation in Indian cities, facilitating data sharing, resource allocation, and project implementation.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="settings.html#advanced">API Access</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><i class="fas fa-envelope"></i> support@idcp.gov.in</p>
+                <p><i class="fas fa-phone"></i> +91 11 2345 6789</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Inter-departmental Cooperation Platform | Ministry of Urban Development, Government of India</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for settings navigation
+            const settingsLinks = document.querySelectorAll('.settings-nav a');
+            
+            settingsLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    settingsLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Get the target section
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    // Scroll to the target section
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            
+            // Color scheme selection
+            const colorOptions = document.querySelectorAll('.color-option');
+            
+            colorOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    colorOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // In a real application, this would update the color scheme
+                    const color = this.style.backgroundColor;
+                    console.log(`Selected color: ${color}`);
+                    
+                    // Show notification
+                    showNotification('Color scheme updated', 'success');
+                });
+            });
+            
+            // Toggle switches
+            const toggleSwitches = document.querySelectorAll('.toggle-switch input');
+            
+            toggleSwitches.forEach(toggle => {
+                toggle.addEventListener('change', function() {
+                    const settingName = this.closest('.setting-item').querySelector('.setting-title').textContent;
+                    const isEnabled = this.checked;
+                    
+                    console.log(`${settingName} is now ${isEnabled ? 'enabled' : 'disabled'}`);
+                    
+                    // Show notification
+                    showNotification(`${settingName} ${isEnabled ? 'enabled' : 'disabled'}`, 'success');
+                });
+            });
+            
+            // Buttons
+            const buttons = document.querySelectorAll('.setting-control button');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const settingName = this.closest('.setting-item').querySelector('.setting-title').textContent;
+                    
+                    if (settingName === 'Delete Account') {
+                        // Show confirmation dialog
+                        if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                            showNotification('Account deletion initiated', 'info');
+                        }
+                    } else {
+                        // Show notification
+                        showNotification(`${settingName} settings opened`, 'info');
+                    }
+                });
+            });
+            
+            // Selects
+            const selects = document.querySelectorAll('select');
+            
+            selects.forEach(select => {
+                select.addEventListener('change', function() {
+                    const settingName = this.closest('.setting-item').querySelector('.setting-title').textContent;
+                    const selectedValue = this.options[this.selectedIndex].text;
+                    
+                    console.log(`${settingName} changed to ${selectedValue}`);
+                    
+                    // Show notification
+                    showNotification(`${settingName} changed to ${selectedValue}`, 'success');
+                });
+            });
+        });
+        
+        // Show notification function
+        function showNotification(message, type = 'info') {
+            // Create notification element if it doesn't exist
+            let notification = document.querySelector('.notification');
+            
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.className = 'notification';
+                document.body.appendChild(notification);
+            }
+            
+            // Set notification content
+            notification.innerHTML = `
+                <div class="notification-icon">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                </div>
+                <div class="notification-message">${message}</div>
+            `;
+            
+            // Add appropriate class
+            notification.className = `notification notification-${type}`;
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 

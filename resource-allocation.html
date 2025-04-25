@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Allocation - Inter-departmental Cooperation Platform</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.svg" alt="Platform Logo">
+            <h1>Inter-departmental Cooperation Platform</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="data-sharing.html"><i class="fas fa-database"></i> Data Sharing</a></li>
+                <li><a href="resource-allocation.html" class="active"><i class="fas fa-share-alt"></i> Resource Allocation</a></li>
+                <li><a href="project-planning.html"><i class="fas fa-project-diagram"></i> Project Planning</a></li>
+                <li><a href="implementation-tracking.html"><i class="fas fa-chart-line"></i> Implementation Tracking</a></li>
+            </ul>
+        </nav>
+        <div class="user-info">
+            <span class="user-name">Welcome, Admin</span>
+            <div class="user-avatar">
+                <img src="images/avatar.svg" alt="User Avatar">
+            </div>
+            <div class="dropdown">
+                <i class="fas fa-caret-down"></i>
+                <div class="dropdown-content">
+                    <a href="profile.html"><i class="fas fa-user-cog"></i> Profile</a>
+                    <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="department-selector">
+                <h3>Select Department</h3>
+                <select id="department-select" aria-label="Select Department">
+                    <option value="all">All Departments</option>
+                    <option value="water">Water Supply</option>
+                    <option value="transport">Transportation</option>
+                    <option value="electricity">Electricity</option>
+                    <option value="waste">Waste Management</option>
+                    <option value="urban">Urban Planning</option>
+                </select>
+            </div>
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="resource-allocation.html#new-request"><i class="fas fa-plus-circle"></i> New Allocation Request</a></li>
+                    <li><a href="resource-allocation.html#history"><i class="fas fa-history"></i> Allocation History</a></li>
+                    <li><a href="resource-allocation.html#reports"><i class="fas fa-file-invoice"></i> Budget Reports</a></li>
+                    <li><a href="resource-allocation.html#inventory"><i class="fas fa-truck"></i> Equipment Inventory</a></li>
+                </ul>
+            </div>
+            <div class="city-selector">
+                <h3>Select City</h3>
+                <select id="city-select" aria-label="Select City">
+                    <option value="delhi">New Delhi</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="bangalore">Bangalore</option>
+                    <option value="chennai">Chennai</option>
+                    <option value="kolkata">Kolkata</option>
+                    <option value="hyderabad">Hyderabad</option>
+                    <option value="pune">Pune</option>
+                </select>
+            </div>
+        </aside>
+
+        <main class="content">
+            <div class="dashboard-header">
+                <h2>Resource Allocation</h2>
+                <div class="date-filter">
+                    <label for="fiscal-year">Fiscal Year:</label>
+                    <select id="fiscal-year" aria-label="Select Fiscal Year">
+                        <option value="2023-2024" selected>2023-2024</option>
+                        <option value="2022-2023">2022-2023</option>
+                        <option value="2021-2022">2021-2022</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="resource-summary">
+                <div class="summary-card">
+                    <h3>Total Budget Allocated</h3>
+                    <p class="amount">₹ 1,250,000,000</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 65%;"></div>
+                    </div>
+                    <p class="sub-text">65% of annual budget</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Resources Utilized</h3>
+                    <p class="amount">₹ 812,500,000</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 42%;"></div>
+                    </div>
+                    <p class="sub-text">42% of annual budget</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Pending Requests</h3>
+                    <p class="amount">18</p>
+                    <p class="sub-text">Worth ₹ 125,000,000</p>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="budget" aria-label="View Budget Allocation">Budget Allocation</button>
+                <button class="tab-btn" data-tab="equipment" aria-label="View Equipment Allocation">Equipment Allocation</button>
+                <button class="tab-btn" data-tab="human" aria-label="View Human Resources">Human Resources</button>
+                <button class="tab-btn" data-tab="requests" aria-label="View Pending Requests">Pending Requests</button>
+            </div>
+
+            <div class="tab-content" id="budget-tab">
+                <div class="chart-container">
+                    <canvas id="budgetChart"></canvas>
+                </div>
+                
+                <div class="allocation-table">
+                    <h3>Department-wise Budget Allocation</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Department</th>
+                                <th>Allocated Budget</th>
+                                <th>Utilized</th>
+                                <th>Remaining</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Water Supply</td>
+                                <td>₹ 300,000,000</td>
+                                <td>₹ 195,000,000 (65%)</td>
+                                <td>₹ 105,000,000</td>
+                                <td>
+                                    <button class="icon-btn" aria-label="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="icon-btn" aria-label="Edit Allocation"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Transportation</td>
+                                <td>₹ 350,000,000</td>
+                                <td>₹ 227,500,000 (65%)</td>
+                                <td>₹ 122,500,000</td>
+                                <td>
+                                    <button class="icon-btn" aria-label="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="icon-btn" aria-label="Edit Allocation"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Electricity</td>
+                                <td>₹ 250,000,000</td>
+                                <td>₹ 150,000,000 (60%)</td>
+                                <td>₹ 100,000,000</td>
+                                <td>
+                                    <button class="icon-btn" aria-label="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="icon-btn" aria-label="Edit Allocation"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Waste Management</td>
+                                <td>₹ 200,000,000</td>
+                                <td>₹ 140,000,000 (70%)</td>
+                                <td>₹ 60,000,000</td>
+                                <td>
+                                    <button class="icon-btn" aria-label="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="icon-btn" aria-label="Edit Allocation"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Urban Planning</td>
+                                <td>₹ 150,000,000</td>
+                                <td>₹ 100,000,000 (67%)</td>
+                                <td>₹ 50,000,000</td>
+                                <td>
+                                    <button class="icon-btn" aria-label="View Details"><i class="fas fa-eye"></i></button>
+                                    <button class="icon-btn" aria-label="Edit Allocation"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="primary-btn" aria-label="Create New Allocation"><i class="fas fa-plus"></i> New Allocation</button>
+                <button class="secondary-btn" aria-label="Generate Report"><i class="fas fa-file-export"></i> Generate Report</button>
+                <button class="secondary-btn" aria-label="Transfer Funds"><i class="fas fa-exchange-alt"></i> Transfer Funds</button>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="allocation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>New Resource Allocation</h3>
+                <button class="close-btn" aria-label="Close Modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="allocation-type">Allocation Type</label>
+                    <select id="allocation-type" aria-label="Select Allocation Type">
+                        <option value="budget">Budget</option>
+                        <option value="equipment">Equipment</option>
+                        <option value="human">Human Resources</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="allocation-department">Department</label>
+                    <select id="allocation-department" aria-label="Select Department">
+                        <option value="water">Water Supply</option>
+                        <option value="transport">Transportation</option>
+                        <option value="electricity">Electricity</option>
+                        <option value="waste">Waste Management</option>
+                        <option value="urban">Urban Planning</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="allocation-amount">Amount (₹)</label>
+                    <input type="number" id="allocation-amount" min="0" step="1000000" value="10000000">
+                </div>
+                <div class="form-group">
+                    <label for="allocation-purpose">Purpose</label>
+                    <textarea id="allocation-purpose" rows="3" placeholder="Describe the purpose of this allocation..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="allocation-date">Allocation Date</label>
+                    <input type="date" id="allocation-date">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" aria-label="Cancel Allocation">Cancel</button>
+                <button class="primary-btn" aria-label="Submit Allocation">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About the Platform</h4>
+                <p>A unified platform for inter-departmental cooperation in Indian cities, facilitating data sharing, resource allocation, and project implementation.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="help-center.html">Help Center</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="settings.html#advanced">API Access</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><i class="fas fa-envelope"></i> support@idcp.gov.in</p>
+                <p><i class="fas fa-phone"></i> +91 11 2345 6789</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Inter-departmental Cooperation Platform | Ministry of Urban Development, Government of India</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Resource Allocation specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Budget Chart
+            const budgetChartCtx = document.getElementById('budgetChart');
+            if (budgetChartCtx) {
+                new Chart(budgetChartCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Water Supply', 'Transportation', 'Electricity', 'Waste Management', 'Urban Planning'],
+                        datasets: [
+                            {
+                                label: 'Allocated Budget',
+                                data: [300, 350, 250, 200, 150],
+                                backgroundColor: 'rgba(26, 115, 232, 0.8)',
+                                borderColor: 'rgba(26, 115, 232, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Utilized Budget',
+                                data: [195, 227.5, 150, 140, 100],
+                                backgroundColor: 'rgba(66, 133, 244, 0.5)',
+                                borderColor: 'rgba(66, 133, 244, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Amount (in Crores ₹)'
+                                },
+                                ticks: {
+                                    callback: function(value) {
+                                        return '₹ ' + value;
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ₹ ' + context.raw + ' Crores';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Tab switching functionality
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // In a real application, this would show different content based on the selected tab
+                    const tabType = this.getAttribute('data-tab');
+                    console.log(`Switching to ${tabType} tab`);
+                    
+                    // Show notification
+                    showNotification(`Showing ${tabType} allocation data`);
+                    
+                    // Simulate loading
+                    simulateLoading();
+                });
+            });
+            
+            // New Allocation button functionality
+            const newAllocationBtn = document.querySelector('.action-buttons .primary-btn');
+            const allocationModal = document.getElementById('allocation-modal');
+            const closeModalBtn = allocationModal.querySelector('.close-btn');
+            const cancelBtn = allocationModal.querySelector('.secondary-btn');
+            const submitBtn = allocationModal.querySelector('.primary-btn');
+            
+            newAllocationBtn.addEventListener('click', function() {
+                // Show modal
+                allocationModal.style.display = 'flex';
+                
+                // Set default date to today
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('allocation-date').value = today;
+            });
+            
+            // Close modal functionality
+            function closeModal() {
+                allocationModal.style.display = 'none';
+            }
+            
+            closeModalBtn.addEventListener('click', closeModal);
+            cancelBtn.addEventListener('click', closeModal);
+            
+            // Submit functionality
+            submitBtn.addEventListener('click', function() {
+                // Get form values
+                const type = document.getElementById('allocation-type').value;
+                const department = document.getElementById('allocation-department').value;
+                const amount = document.getElementById('allocation-amount').value;
+                const purpose = document.getElementById('allocation-purpose').value;
+                
+                // In a real application, this would make an API call to create a new allocation
+                console.log(`Creating new ${type} allocation of ₹${amount} for ${department} department`);
+                
+                // Close modal
+                closeModal();
+                
+                // Show notification
+                showNotification('Resource allocation created successfully');
+                
+                // Simulate loading
+                simulateLoading();
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target === allocationModal) {
+                    closeModal();
+                }
+            });
+            
+            // Table action buttons functionality
+            const viewButtons = document.querySelectorAll('.allocation-table .icon-btn:nth-child(1)');
+            const editButtons = document.querySelectorAll('.allocation-table .icon-btn:nth-child(2)');
+            
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Get department name from row
+                    const row = this.closest('tr');
+                    const department = row.querySelector('td:first-child').textContent;
+                    
+                    // In a real application, this would show detailed information for the department
+                    console.log(`Viewing details for ${department}`);
+                    
+                    // Show notification
+                    showNotification(`Viewing budget details for ${department}`);
+                });
+            });
+            
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Get department name from row
+                    const row = this.closest('tr');
+                    const department = row.querySelector('td:first-child').textContent;
+                    
+                    // In a real application, this would open an edit form for the department
+                    console.log(`Editing allocation for ${department}`);
+                    
+                    // Show notification
+                    showNotification(`Editing budget allocation for ${department}`);
+                });
+            });
+            
+            // Generate Report button functionality
+            const generateReportBtn = document.querySelector('.action-buttons .secondary-btn:nth-child(2)');
+            
+            generateReportBtn.addEventListener('click', function() {
+                // In a real application, this would generate a report
+                console.log('Generating resource allocation report');
+                
+                // Show notification
+                showNotification('Generating report, please wait...');
+                
+                // Simulate loading
+                simulateLoading();
+                
+                // Show download notification after a delay
+                setTimeout(() => {
+                    showNotification('Report generated successfully. Downloading...');
+                }, 2000);
+            });
+            
+            // Transfer Funds button functionality
+            const transferFundsBtn = document.querySelector('.action-buttons .secondary-btn:nth-child(3)');
+            
+            transferFundsBtn.addEventListener('click', function() {
+                // In a real application, this would open a transfer funds form
+                console.log('Opening transfer funds form');
+                
+                // Show notification
+                showNotification('Transfer funds functionality coming soon');
+            });
+        });
+    </script>
+</body>
+</html> 
